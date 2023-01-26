@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Supplier(models.Model):
-   
+    
    name = models.CharField('Поставщик', max_length=100)
    address = models.CharField('Адрес', max_length=100)
    tel = models.CharField('Телефон', max_length=10)
@@ -14,8 +14,8 @@ class Supplier(models.Model):
    class Meta:
       verbose_name = 'Поставщик'
       verbose_name_plural = 'Поставщики'
- 
-
+      
+   
 class Products(models.Model):
    
    title = models.CharField('Название Продукта', max_length=100, unique=True)
@@ -29,9 +29,8 @@ class Products(models.Model):
        ('L', 'Large'),
    )
    options = models.CharField('Опции', max_length=1, choices=options_list, default='')
-     
-   
-   
+   img = models.ImageField('Фото', default= '', upload_to='products_img')
+        
    def __str__(self):
        return self.title
      
@@ -47,6 +46,7 @@ class Orders(models.Model):
    name = models.CharField('Имя', max_length=15)
    surname = models.CharField('Фамилия', max_length=20)
    phone = models.CharField('Телефон', max_length=10)
+   total = models.DecimalField('Сумма', max_digits=10, decimal_places=2, default=0)
    
    def __str__(self):
        return f'Заказ №{self.name}'

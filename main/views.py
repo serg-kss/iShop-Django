@@ -1,16 +1,11 @@
 from django.shortcuts import render
+from .models import Products
 
 
 def home (request):
-   number = 50
-   products = [
-      {
-         'id':number
-      }
-   ]
-     
+      
    data = {
       'title': 'Головна сторінка',
-      'products': products
+      'products': Products.objects.all()
    }  
    return render(request, 'main/main.html', data)
