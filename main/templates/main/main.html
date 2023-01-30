@@ -24,7 +24,13 @@
             <span class="text-red-500 line-through mb-0.5">${{product.price}}</span>
           </div>
         </div>
-      </div>      
+      </div>
+      <p class="price">${{ product.price }}</p>
+      <form action="{% url "cart:cart_add" product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+        </form>      
       {% endfor %}    
       <!-- product - end -->
     </div>

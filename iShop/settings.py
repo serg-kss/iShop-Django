@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/products_img/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'products_img')
+
+CART_SESSION_ID = 'cart'
 
 
 # Default primary key field type
