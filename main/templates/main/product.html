@@ -10,8 +10,7 @@
       <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold">Товары</h2>
     </div>   
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-8">
-      <!-- product - start -->      
-      {% for product in products %}
+      <!-- product - start -->            
       <div>
         <a href="#" class="group h-80 block bg-gray-100 rounded-lg overflow-hidden relative mb-2 lg:mb-3">
           <img src="{{product.img.url}}" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
@@ -24,8 +23,14 @@
             <span class="text-red-500 line-through mb-0.5">${{product.price}}</span>
           </div>
         </div>
-      </div>     
-      {% endfor %}    
+      </div>
+      <p class="price">${{ product.price }}</p>
+      <form action="{% url "cart:cart_add" product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+      </form>      
+        
       <!-- product - end -->
     </div>
   </div>
