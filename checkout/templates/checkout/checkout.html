@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% block description %}
+  <meta name="description" content="контакты">
+{% endblock description %}
+{% block title %}{{title}}{% endblock title %}
+{% block body %}
+  <!-- component -->
+<!-- Tailwind Play: https://play.tailwindcss.com/qIqvl7e7Ww  -->
+
+<div class="flex min-h-screen items-center justify-start bg-white">
+  <div class="mx-auto w-full max-w-lg">
+    <h1 class="text-4xl font-medium">New order</h1>
+    <p class="mt-3">Creation of order:</p>
+    <form method="post" class="mt-10">
+      {% csrf_token %}
+      {{form}}
+      <button type="submit" class="mt-5 rounded-md bg-black px-10 py-2 text-white">Send order</button>
+    </form>
+  </div>
+</div>
+{% endblock body %}

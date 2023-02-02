@@ -46,7 +46,8 @@ class Orders(models.Model):
    name = models.CharField('Имя', max_length=15)
    surname = models.CharField('Фамилия', max_length=20)
    phone = models.CharField('Телефон', max_length=10)
-   total = models.DecimalField('Сумма', max_digits=10, decimal_places=2, default=0)
+   email = models.CharField('Email', max_length=20, default='')
+   total = models.CharField('Сумма', default='0',max_length=100)
    
    def __str__(self):
        return f'Заказ №{self.name}'

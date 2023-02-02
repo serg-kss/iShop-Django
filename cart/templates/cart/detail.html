@@ -2,46 +2,84 @@
 {% block description %}
   <meta name="description" content="контакты">
 {% endblock description %}
-{% block title %}SomeP{% endblock title %}
+{% block title %}Cart{% endblock title %}
 {% block body %}
-<h1>Your shopping cart</h1>
-<table class="cart">
-    <thead>
-    <tr>
-        <th>Image</th>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Remove</th>
-        <th>Unit price</th>
-        <th>Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for item in cart %}
-        {% with product=item.product %}
-            <tr>
-                <td>
-                    <a href="{{ product.get_absolute_url }}">
-                        
-                    </a>
-                </td>
-                <td>{{ product.name }}</td>
-                <td>{{ item.quantity }}</td>
-                <td><a href="{% url "cart:cart_remove" product.id%}">Remove</a></td>
-                <td class="num">${{ item.price }}</td>
-                <td class="num">${{ item.total_price }}</td>
-            </tr>
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="max-w-screen-lg px-4 md:px-8 mx-auto">
+      <div class="mb-6 sm:mb-10 lg:mb-16">
+        <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Your Cart</h2>
+      </div>
+      <div class="flex flex-col sm:border-t sm:border-b sm:divide-y mb-5 sm:mb-8">
+        <!-- product - start -->
+        {% for item in cart %}
+        {% with product=item.product %} 
+        <div class="py-5 sm:py-8">
+          <div class="flex flex-wrap gap-4 lg:gap-6 sm:py-2.5">
+            <div class="sm:-my-2.5">
+              <a href="/product/{{ product.id }}" class="group w-24 sm:w-40 h-40 sm:h-56 block bg-gray-100 rounded-lg overflow-hidden relative">
+                <img src="{{product.img.url}}" loading="lazy" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+              </a>
+            </div>  
+            <div class="flex flex-col justify-between flex-1">
+              <div>
+                <a href="/product/{{ product.id }}" class="inline-block text-gray-800 hover:text-gray-500 text-lg lg:text-xl font-bold transition duration-100 mb-1">{{ product.title }}</a>
+                <span class="block text-gray-500">Amount: {{ item.quantity }}</span>
+              </div>  
+              <div>
+                <span class="block text-gray-800 md:text-lg font-bold mb-1">{{ item.price }}</span> 
+                <span class="flex items-center text-gray-500 text-sm gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  In stock
+                </span>
+              </div>
+            </div>  
+            <div class="w-full sm:w-auto flex justify-between border-t sm:border-none pt-4 sm:pt-0">
+              <div class="flex flex-col items-start gap-2">
+                <a class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 text-sm font-semibold select-none transition duration-100"
+                   href="{% url "cart:cart_remove" product.id%}">Remove</a>
+              </div>  
+              <div class="pt-3 sm:pt-2 ml-4 md:ml-8 lg:ml-16">
+                <span class="block text-gray-800 md:text-lg font-bold">{{ item.total_price }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
         {% endwith %}
-    {% endfor %}
-    <tr class="total">
-        <td>Total</td>
-        <td colspan="4"></td>
-        <td class="num">${{ cart.get_total_price }}</td>
-    </tr>
-    </tbody>
-</table>
-<p class="text-right">
-    <a href="{% url "home-page" %}" class="button light">Continue shopping</a>
-    <a href="#" class="button">Checkout</a>
-</p>
+      {% endfor %}       
+        <!-- product - end -->       
+      </div>  
+      <!-- totals - start -->
+      <div class="flex flex-col items-end gap-4">
+        <div class="w-full sm:max-w-xs bg-gray-100 rounded-lg p-4">
+          <div class="space-y-1">
+          <!--   <div class="flex justify-between text-gray-500 gap-4">
+              <span>Subtotal</span>
+              <span>$129.99</span>
+            </div>
+  
+           <div class="flex justify-between text-gray-500 gap-4">
+              <span>Shipping</span>
+              <span>$4.99</span>
+            </div>-->
+          </div>  
+          <div class="border-t pt-4 mt-4">
+            <div class="flex justify-between items-start text-gray-800 gap-4">
+              <span class="text-lg font-bold">Total</span>
+  
+              <span class="flex flex-col items-end">
+                <span class="text-lg font-bold">${{ cart.get_total_price }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <a href="{% url "home-page" %}" class="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Continue shopping</a>
+        <a href="{% url "checkout" %}" class="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Check out</a>
+      </div>
+      <!-- totals - end -->
+    </div>
+  </div>
 {% endblock body %}
+
+
