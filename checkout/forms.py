@@ -1,5 +1,6 @@
 from django import forms
 from main.models import Orders
+from .choices import *
 
 
 class CreateOrderForm(forms.Form):
@@ -34,6 +35,11 @@ class CreateOrderForm(forms.Form):
             'class': 'peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
          }
       ))
+   delivery = forms.ChoiceField(
+      label='Chose a Delivery',
+      required=True,
+      choices=options_list_checkout
+   )
    
    class Meta:
       model = Orders

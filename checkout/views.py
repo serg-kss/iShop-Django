@@ -5,19 +5,22 @@ from cart.cart import Cart
 
 
 def checkout(request):
-   
    if request.method == "POST":
       form = CreateOrderForm(request.POST)
       if form.is_valid():
          order = Orders()
          cart = Cart(request)
+         order.goods = ''
+         for item in cart:
+            order.goods = order.goods + item['product'].title + ' - ' + str(item['quantity']) + '; '               
          order.order_number = Orders.objects.latest('id').order_number + 1
          order.name = form.cleaned_data.get('name')
          order.surname = form.cleaned_data.get('surname')
          order.phone = form.cleaned_data.get('phone')
          order.email = form.cleaned_data.get('email')
          order.total = str(cart.get_total_price())
-         order.save()         
+         order.save()
+         cart.clear()         
          return redirect('home-page')
    else:
       form = CreateOrderForm()

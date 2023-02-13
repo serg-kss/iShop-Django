@@ -28,7 +28,7 @@ class Products(models.Model):
        ('M', 'Medium'),
        ('L', 'Large'),
    )
-   options = models.CharField('Опции', max_length=1, choices=options_list, default='')
+   options = models.CharField('Опции', max_length=1, choices=options_list, default='S')
    img = models.ImageField('Фото', default= '', upload_to='products_img')
         
    def __str__(self):
@@ -48,9 +48,10 @@ class Orders(models.Model):
    phone = models.CharField('Телефон', max_length=10)
    email = models.CharField('Email', max_length=20, default='')
    total = models.CharField('Сумма', default='0',max_length=100)
+   goods = models.CharField('Товары',max_length =250, default='')
    
    def __str__(self):
-       return f'Заказ №{self.name}'
+       return f'Заказ №{self.order_number}'
    
    class Meta:
       verbose_name = 'Заказ'
