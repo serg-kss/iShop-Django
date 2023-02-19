@@ -3,6 +3,9 @@
   <meta name="description" content="краткое описание главной страницы">
 {% endblock description %}
 {% block title %}{{title}}{% endblock title %}
+{% block nav %}
+  {% include 'main/nav-noanim.html' %}
+{% endblock nav %}
 {% block body %}
 <div class="bg-white py-6 sm:py-8 lg:py-12">
   <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">

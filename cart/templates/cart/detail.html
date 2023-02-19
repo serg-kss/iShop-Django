@@ -3,12 +3,31 @@
   <meta name="description" content="контакты">
 {% endblock description %}
 {% block title %}Cart{% endblock title %}
+{% block nav %}
+  {% include 'main/nav-noanim.html' %}
+{% endblock nav %}
 {% block body %}
 <div class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-screen-lg px-4 md:px-8 mx-auto">
       <div class="mb-6 sm:mb-10 lg:mb-16">
         <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6 animate__animated animate__backInDown">Your Cart</h2>
       </div>
+      {% if cart|length == 0 %}
+        <figure class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700 animate__animated animate__zoomIn">
+          <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Very easy this was to integrate</h3>
+              <p class="my-4 font-light">If you care for your time, I hands down would go with this."</p>
+          </blockquote>
+          <figcaption class="flex items-center justify-center space-x-3">
+              <img class="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png" alt="profile picture">
+              <div class="space-y-0.5 font-medium dark:text-white text-left">
+                  <div>Bonnie Green</div>
+                  <div class="text-sm font-light text-gray-500 dark:text-gray-400">Developer at Open AI</div>
+              </div>
+          </figcaption>    
+        </figure>
+      {% endif %}
+      {% if cart|length != 0 %}
       <div class="flex flex-col sm:border-t sm:border-b sm:divide-y mb-5 sm:mb-8">
         <!-- product - start -->
         {% for item in cart %}
@@ -54,15 +73,6 @@
       <div class="flex flex-col items-end gap-4">
         <div class="w-full sm:max-w-xs bg-gray-100 rounded-lg p-4">
           <div class="space-y-1">
-          <!--   <div class="flex justify-between text-gray-500 gap-4">
-              <span>Subtotal</span>
-              <span>$129.99</span>
-            </div>
-  
-           <div class="flex justify-between text-gray-500 gap-4">
-              <span>Shipping</span>
-              <span>$4.99</span>
-            </div>-->
           </div>  
           <div class="border-t pt-4 mt-4">
             <div class="flex justify-between items-start text-gray-800 gap-4">
@@ -77,7 +87,8 @@
         <a href="{% url "home-page" %}" class="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Continue shopping</a>
         <a href="{% url "checkout" %}" class="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Check out</a>
       </div>
-      <!-- totals - end -->
+      <!-- totals - end -->     
+      {% endif %}     
     </div>
   </div>
 {% endblock body %}
