@@ -4,6 +4,7 @@ from cart.forms import CartAddProductForm
 from django.views.generic import ListView, DetailView
 
 
+
 class MainPage(ListView):
    model = Products
    template_name = 'main/main.html'
@@ -24,14 +25,14 @@ class ProductPage(DetailView):
    def get_context_data(self, **kwargs):
       cart_product_form = CartAddProductForm()
       ctx = super(ProductPage, self).get_context_data(**kwargs)
-      ctx['title'] = 'Головна сторінка'
+      ctx['title'] = ''
       ctx['cart_product_form'] = cart_product_form
       
       return ctx
 
 
 def contacts (request):
-      
+        
    data = {
       'title': 'Контакти',
    }  

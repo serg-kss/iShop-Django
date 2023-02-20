@@ -8,12 +8,13 @@ class SupplierAdmin(admin.ModelAdmin):
 
     
 @admin.register(Products)
-class SupplierAdmin(admin.ModelAdmin):
+class ProductsAdmin(admin.ModelAdmin):
     list_display = ('title','price', 'amount', 'supplier')
+    prepopulated_fields = {"slug": ("title",)}
     
     
 @admin.register(Orders)
-class SupplierAdmin(admin.ModelAdmin):
+class OrdersAdmin(admin.ModelAdmin):
     list_display = ('order_number','date', 'total')
     list_filter = ('order_number', 'date', 'phone')
 

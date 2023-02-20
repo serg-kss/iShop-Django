@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
 class Supplier(models.Model):
@@ -15,14 +17,16 @@ class Supplier(models.Model):
       verbose_name = 'Поставщик'
       verbose_name_plural = 'Поставщики'
       
+      
    
 class Products(models.Model):
+    
    
    title = models.CharField('Название Продукта', max_length=100, unique=True)
    description = models.TextField('Описание Продукта')
    price = models.DecimalField('Цена', max_digits=7, decimal_places=2)
    amount = models.IntegerField('Склад', default=0)
-   supplier = models.ForeignKey(Supplier, verbose_name = 'Поставщик', on_delete=models.CASCADE, default='')
+   supplier = models.ForeignKey(Supplier, verbose_name = 'Поставщик', on_delete=models.CASCADE, default=Supplier)
    options_list = (
        ('S', 'Small'),
        ('M', 'Medium'),
@@ -30,6 +34,15 @@ class Products(models.Model):
    )
    options = models.CharField('Опции', max_length=1, choices=options_list, default='S')
    img = models.ImageField('Фото', default= '', upload_to='products_img')
+   slug = models.SlugField(null=False, unique=True, default='')
+   
+   def get_absolute_url(self):
+        return reverse("product_detail", kwargs={"slug": self.slug})
+    
+   def save(self, *args, **kwargs):  # new
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs) 
         
    def __str__(self):
        return self.title

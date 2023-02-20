@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% block title %}{{title}}{% endblock title %}
+{% block nav %}
+  {% include 'main/nav-noanim.html' %}
+{% endblock nav %}
+{% block body %}
+   <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-white p-8 sm:p-12">
+      <div class="w-full max-w-xl rounded-2xl bg-violet-50 px-20 py-14">
+        <div class="mx-auto flex max-w-sm flex-col items-center">
+          <h3 class="max-w-2xl text-center text-2xl font-bold leading-tight sm:text-3xl md:text-2xl md:leading-tight">Thank You</h3>
+          <p class="mt-3 text-center text-black/80">We will contact You as soon as possible. Have a nice day!</p>                     
+         <a href="{% url 'home-page' %}" class="rounded-lg bg-black mt-5 px-5 py-3 font-bold text-white">Main Page</a>          
+        </div>
+      </div>
+    </div>
+{% endblock body %}

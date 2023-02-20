@@ -2,7 +2,7 @@
 {% block description %}
   <meta name="description" content="краткое описание главной страницы">
 {% endblock description %}
-{% block title %}{{title}}{% endblock title %}
+{% block title %}{{product.title}}{% endblock title %}
 {% block nav %}
   {% include 'main/nav-noanim.html' %}
 {% endblock nav %}
@@ -30,8 +30,6 @@
         {% csrf_token %}
         <input type="submit" value="Add to cart" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
       </form>      
-        
-      <!-- product - end -->
     </div>
   </div>
 </div>

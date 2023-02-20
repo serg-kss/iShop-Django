@@ -21,11 +21,16 @@ def checkout(request):
          order.total = str(cart.get_total_price())
          order.save()
          cart.clear()         
-         return redirect('home-page')
+         return redirect('result')
    else:
       form = CreateOrderForm()
    return render(request, 'checkout/checkout.html', {
       'form': form,
       'title': 'Checkout'})
+
+
+def result(request):
+   return render(request, 'checkout/result.html', {
+      'title': 'Thank You'})
 
 # Create your views here.
