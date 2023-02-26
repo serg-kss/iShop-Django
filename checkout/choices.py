@@ -1,7 +1,5 @@
-
-
 options_list_checkout = (
-       ('N', 'NovaPost'),
-       ('P', 'UkrPost'),
-       ('S', 'SelfPickUp'),
+    ('NovaPost', 'NovaPost'),
+    ('SelfPickUp', 'SelfPickUp'),
+    ('Post', 'Post'),       
    )

@@ -1,7 +1,4 @@
 {% extends "main/base.html" %}
-{% block description %}
-  <meta name="description" content="контакты">
-{% endblock description %}
 {% block title %}{{title}}{% endblock title %}
 {% block nav %}
   {% include 'main/nav-noanim.html' %}
@@ -18,4 +15,36 @@
     </form>
   </div>
 </div>
+<script>
+  var delivery_div = document.getElementById('id_delivery');
+  delivery_div.classList.add(
+    'bg-white', 
+    'border-0', 
+    'border-b',
+    'border-gray-500', 
+    'text-gray-900', 
+    'text-sm',
+    'focus:ring-gray-500',
+    'focus:border-gray-500',
+    'block',
+    'w-full',
+    'mt-2',
+    'p-2.5',
+    'dark:bg-gray-700',
+    'dark:border-gray-600',
+    'dark:placeholder-gray-400',
+  );
+
+  var val = delivery_div.value;
+  var delivery_info = document.getElementById('id_delivery_info');
+  document.querySelector("select").addEventListener('change', function (e) {
+    val = e.target.value;
+    if (val == 'SelfPickUp') {
+      delivery_info.classList.add('animate__animated', 'animate__backOutRight');
+    }else
+      delivery_info.classList.remove('animate__animated', 'animate__backOutRight');
+      delivery_info.classList.add('animate__animated', 'animate__backInRight');
+  });
+
+</script>
 {% endblock body %}

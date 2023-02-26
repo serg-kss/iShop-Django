@@ -17,11 +17,9 @@ class Supplier(models.Model):
       verbose_name = 'Поставщик'
       verbose_name_plural = 'Поставщики'
       
-      
-   
+        
 class Products(models.Model):
-    
-   
+      
    title = models.CharField('Название Продукта', max_length=100, unique=True)
    description = models.TextField('Описание Продукта')
    price = models.DecimalField('Цена', max_digits=7, decimal_places=2)
@@ -61,7 +59,8 @@ class Orders(models.Model):
    phone = models.CharField('Телефон', max_length=10)
    email = models.CharField('Email', max_length=20, default='')
    total = models.CharField('Сумма', default='0',max_length=100)
-   goods = models.CharField('Товары',max_length =250, default='')
+   goods = models.CharField('Товары', max_length =250, default='')
+   delivery = models.CharField('Доставка', max_length =250, default='')
    
    def __str__(self):
        return f'Заказ №{self.order_number}'
